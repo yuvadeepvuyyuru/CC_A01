@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPU DATABASE </title>
+    <style>
+        .left {
+            width: 30%;
+            float: left;
+            text-align: right;
+        }
+        .right {
+            width: 65%;
+            margin-left: 10px;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+<h2><center><u>Add Devices</center></h2><br />
+
+<form action="/adddriver" method="post">
+
+    <div >
+        <div class="left">
+            Device Name:
+        </div>
+        <div class="right">
+            <input name="device_name" type="text" value= {{selected_driver.device_name}}> <br />
+        </div>
+    </div>
+
+    <div>
+        <div class="left">
+            Manufacture Name:
+        </div>
+        <div class="right">
+            <input name="manufacturer_name" type="text" value="{{selected_driver.manufacturer_name}}"/> <br />
+        </div>
+    </div>
+
+    <div>
+        <div class="left">
+            Date Issued:
+        </div>
+        <div class="right">
+            <input name="date" type="date" value="{{selected_driver.date}}"/> <br />
+        </div>
+    </div>
+
+    <input type="hidden" value="{{driver_name}}" name="driver_name"/>
+
+    <br /><h3>Features :</h3>
+
+    {% if selected_driver.geometry_shader %}
+    <input name="radio_geometry" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_geometry" type="checkbox" />
+    {% endif %}
+    Geometry Shader <br />
+
+    {% if selected_driver.tesselation_shader %}
+    <input name="radio_tesselation_shader" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_tesselation_shader" type="checkbox" />
+    {% endif %}
+    Tesse Shader <br />
+
+    {% if selected_driver.shader %}
+    <input name="radio_shader_int" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_shader_int" type="checkbox" />
+    {% endif %}
+    ShaderInt16 <br />
+
+    {% if selected_driver.sparse_binding %}
+    <input name="radio_sparse_blinding" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_sparse_blinding" type="checkbox" />
+    {% endif %}
+    Sparse Binding <br />
+
+    {% if selected_driver.texture_compression %}
+    <input name="radio_texture" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_texture" type="checkbox" />
+    {% endif %}
+    TextureCompression ETC2 <br />
+
+    {% if selected_driver.vertex_pipeline %}
+    <input name="radio_vertex" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_vertex" type="checkbox" />
+    {% endif %}
+    Vertex Pipeline Stores And Atomics <br /><br />
+
+    <input type="submit" value="Cancel" name="cancel" />
+    <input type="submit" value="{{button_action}}" name="add_driver" />
+
+</form>
+<style>
+        body {background-color: cornsilk;}
+        h2 {color: firebrick}
+
+</style>
+
+</body>
+</html>

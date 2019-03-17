@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPU DATASTORE</title>
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+        .tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+        .tg .tg-baqh{text-align:center;vertical-align:top}
+        .tg .tg-mb3i{background-color:#D2E4FC;text-align:right;vertical-align:top}
+        .tg .tg-lqy6{text-align:right;vertical-align:top}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+</head>
+<body>
+<br/>
+<h2>Add Devices <a href="/adddriver">click here</a></h2>
+
+</br>
+<form method="Get">
+
+    {% if radio_geometry %}
+    <input name="radio_geometry" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_geometry" type="checkbox" />
+    {% endif %}
+    Geometry Shader <br />
+
+    {% if radio_teselation_shader %}
+    <input name="radio_teselation_shader" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_teselation_shader" type="checkbox">
+    {% endif %}
+    Tesse Shader <br />
+
+    {% if radio_shader_int %}
+    <input name="radio_shader_int" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_shader_int" type="checkbox" >
+    {% endif %}
+    ShaderInt16 <br />
+
+    {% if radio_sparse_blinding %}
+    <input name="radio_sparse_blinding" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_sparse_blinding" type="checkbox" >
+    {% endif %}
+    Sparse Binding <br />
+
+    {% if radio_texture %}
+    <input name="radio_texture" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_texture" type="checkbox" />
+    {% endif %}
+    TextureCompression ETC2 <br />
+
+    {% if radio_vertex %}
+    <input name="radio_vertex" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_vertex" type="checkbox" />
+    {% endif %}
+    Vertex Pipeline Stores And Atomics <br />
+
+    <br />
+
+
+    <input type="submit" value="Cancel" name="search_driver" />
+    <input type="submit" value="Search" name="search_driver" />
+
+</form>
+
+</br>
+<table class="tg" >
+    <tr>
+        <th class="tg-baqh" colspan="6">Added Devices</th>
+    </tr>
+    <tr>
+        <td class="tg-hmp3">Device Name</td>
+        <td class="tg-hmp3">Manufacture Name</td>
+        <td class="tg-hmp3">Date</td>
+    </tr>
+    <tbody>
+
+    {% if list_drivers|length > 0 %}
+
+    {% for driver in list_drivers %}
+
+    <tr>
+        <td><a href="/adddriver?driver_name={{ driver.device_name }}">{{ driver.device_name }}</a></td>
+        <td>{{ driver.manufacturer_name }}</td>
+        <td>{{ driver.date }}</td>
+    </tr>
+
+    {% endfor %}
+
+    {% else %}
+
+    <tr>
+        <th class="tg-baqh" colspan="6">No Drivers Found</th>
+    </tr>
+
+    {% endif %}
+
+    </tbody>
+</table>
+
+</body>
+</html>

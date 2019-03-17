@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>GPU DATABASE</title>
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+        .tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+        .tg .tg-baqh{text-align:center;vertical-align:top}
+        .tg .tg-mb3i{background-color:#D2E4FC;text-align:right;vertical-align:top}
+        .tg .tg-lqy6{text-align:right;vertical-align:top}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+
+</head>
+<body>
+{% if user %}
+<h1 style="text-align: right;"><center>GPU DATABASE</center>
+    <br/><small><center>Welcome User</center></small> &nbsp;&nbsp;&nbsp;
+    <button  style="height:30px; width:70px"  onclick="location.href='{{ url }}'" type="button">
+        LOGOUT
+    </button>
+</h1>
+
+<p style="text-align: center;"><strong style="color: #000;">Login User Email id: </strong> {{ user.email() }} &nbsp;&nbsp;&nbsp;
+    <button  style="height:30px; width:100px"  onclick="location.href='/adddriver'" type="button">
+        Add Device
+    </button>
+
+    <!--<button  style="height:30px; width:150px"  onclick="location.href='/comparedrivers'" type="button">-->
+        <!--Compare All Devices-->
+    <!--</button>-->
+
+</p>
+
+<form style="text-align: center;" method="Get">
+
+    {% if radio_geometry %}
+    <input name="radio_geometry" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_geometry" type="checkbox" />
+    {% endif %}
+    Geometry Shader <br />
+
+    {% if radio_tesselation_shader %}
+    <input name="radio_tesselation_shader" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_tesselation_shader" type="checkbox" >
+    {% endif %}
+    Tesse Shader <br />
+
+    {% if radio_shader_int %}
+    <input name="radio_shader_int" type="checkbox" checked />
+    {% else %}
+    <input name="radio_shader_int" type="checkbox" >
+    {% endif %}
+    ShaderInt16 <br />
+
+    {% if radio_sparse_blinding %}
+    <input name="radio_sparse_blinding" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_sparse_blinding" type="checkbox" >
+    {% endif %}
+    Sparse Binding <br />
+
+    {% if radio_texture %}
+    <input name="radio_texture" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_texture" type="checkbox" />
+    {% endif %}
+    TextureCompression ETC2 <br />
+
+    {% if radio_vertex %}
+    <input name="radio_vertex" type="checkbox" checked/>
+    {% else %}
+    <input name="radio_vertex" type="checkbox" />
+    {% endif %}
+    Vertex Pipeline Stores And Atomics <br />
+
+    <br />
+
+
+    <input type="submit" value="Cancel" name="search_driver" />
+    <input type="submit" value="Search" name="search_driver" />
+
+</form>
+
+</br>
+
+<table align="center" class="tg" id="tableview">
+    <tr>
+        <th class="tg-baqh" colspan="4">Added Devices</th>
+    </tr>
+    <tr>
+        <td class="tg-hmp3">Device Name</td>
+        <td class="tg-hmp3">Manufacture Name</td>
+        <td class="tg-hmp3">Date</td>
+        <td class="tg-hmp3">Compare</td>
+    </tr>
+    <tbody>
+
+    {% if list_drivers|length > 0 %}
+
+    {% for device in list_drivers %}
+
+    <tr>
+        <td><a href="/adddriver?driver_name={{ device.key.id() }}">{{ device.device_name }}</a></td>
+        <td>{{ device.manufacturer_name }}</td>
+        <td>{{ device.date }}</td>
+        <td >
+            <form method="GET" action="/comparedrivers">
+                <select name="selected_device">
+                    <option name="">Select</option>
+                    {% for select_device in list_drivers %}
+                    {% if select_device.device_name != device.device_name %}
+                    <option value="{{select_device.device_name}}" >{{select_device.device_name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                    <input type="hidden" name="current_device" value="{{device.device_name}}" />
+                    <input type="submit" value="compare"/>
+                </select>
+            </form>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+    {% else %}
+
+    <tr>
+        <th class="tg-baqh" colspan="6">No Drivers Found</th>
+    </tr>
+
+    {% endif %}
+
+    </tbody>
+</table>
+
+{% else %}
+<h1 style="text-align: center;">Welcome to the GPU database!<br/><br/>
+    <button  style="height:40px; width:80px"  onclick="location.href='{{ url }}'" type="button">
+        LOGIN
+    </button>
+</h1>
+<p style="text-align: center;"><strong style="color: #000;">Please login </strong></p>
+
+{% endif %}
+
+<style>
+        body {background-color: cornsilk;}
+        h1 {color: firebrick}
+
+</style>
+
+</body>
+</html>
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparison</title>
+
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+        .tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+        .tg .tg-baqh{text-align:center;vertical-align:top}
+        .tg .tg-mb3i{background-color:#D2E4FC;text-align:center;vertical-align:top}
+        .tg .tg-lqy6{text-align:center;vertical-align:top}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+</head>
+<body>
+<form >
+    <input type="submit" value="Back" name="cancel" align="right"/>
+</form>
+
+<table align="center" class="tg" id="tableview">
+    <tr>
+        <th class="tg-baqh" colspan="6">Comparsion of drivers!!!</th>
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>Driver Name</strong></td>
+        {% for driver in list_drivers %}
+        <td class="tg-mb3i"><strong>{{ driver.device_name }}</strong></td>
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>Geometry Shader</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.geometry_shader %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>Tesse Shader</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.tesselation_shader %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>ShaderInt16</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.shader %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>Sparse Binding</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.sparse_binding %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>TextureCompression ETC2</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.texture_compression %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+    <tr>
+        <td class="tg-mb3i"><strong>Vertex Pipeline Stores And Atomics</strong></td>
+        {% for driver in list_drivers %}
+        {% if driver.vertex_pipeline %}
+        <td class="tg-lqy6"><input name="" type="checkbox" checked disabled/></td>
+        {% else %}
+        <td class="tg-lqy6"><input name="" type="checkbox" disabled/></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+
+</table>
+<style>
+        body {background-color: cornsilk;}
+        h1 {color: firebrick}
+
+</style>
+</body>
+</html>
